@@ -1,0 +1,22 @@
+{
+  "skills": [
+    {
+      "name": "domain-modeling",
+      "repo": "mattpocock/skills",
+      "ref": "main",
+      "path": "skills/engineering/domain-modeling",
+      "license": {
+        "from": "LICENSE",
+        "to": "LICENSES/mattpocock-skills-MIT.txt"
+      },
+      "syncedFrom": "49dd158d1076134a641b33efb035946536778336"
+    },
+    {
+      "name": "frontend-design",
+      "repo": "anthropics/skills",
+      "ref": "main",
+      "path": "skills/frontend-design",
+      "syncedFrom": "dbd4588f9e1033efb41dad4bef2f7947c8993d44"
+    }
+  ]
+}
