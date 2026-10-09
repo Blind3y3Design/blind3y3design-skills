@@ -1,6 +1,7 @@
 ---
 name: arena
 description: "Arena: run N independent attempts at one task on models the user picks, judge them against a rubric, take the strongest as the base, and graft the best of the rest into it. Use only when the user asks to arena a task ('arena this', 'throw it in the arena', /arena)."
+disable-model-invocation: true
 license: MIT
 metadata:
   upstream: "https://github.com/cursor/plugins/tree/main/pstack/skills/arena"

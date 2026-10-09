@@ -17,6 +17,17 @@
       "ref": "main",
       "path": "skills/frontend-design",
       "syncedFrom": "dbd4588f9e1033efb41dad4bef2f7947c8993d44"
+    },
+    {
+      "name": "unslop",
+      "repo": "cursor/plugins",
+      "ref": "main",
+      "path": "pstack/skills/unslop",
+      "license": {
+        "from": "pstack/LICENSE",
+        "to": "LICENSES/pstack-MIT.txt"
+      },
+      "syncedFrom": "ccb5507cec1546dc88135c1139c811e6c59115ba"
     }
   ]
 }
