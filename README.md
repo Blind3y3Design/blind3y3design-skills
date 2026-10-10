@@ -42,7 +42,7 @@ I keep them as files in this repo only so that `npx skills add Blind3y3Design/bl
 
 ### Keeping the copies current
 
-A [scheduled GitHub Action](.github/workflows/sync-upstream-skills.yml) runs every Monday at 14:00 UTC. It runs [`scripts/sync-upstream.sh`](scripts/sync-upstream.sh), which re-copies each folder listed in `upstream.json` from its creator's repo. If anything changed, it opens a pull request named "Sync upstream skills" with a link to each upstream diff. If nothing changed, it does nothing. To let the action open pull requests, turn on **Settings > Actions > General > Workflow permissions > Allow GitHub Actions to create and approve pull requests**.
+A [scheduled GitHub Action](.github/workflows/sync-upstream-skills.yml) runs on the 1st of each month at 14:00 UTC. It runs [`scripts/sync-upstream.sh`](scripts/sync-upstream.sh), which re-copies each folder listed in `upstream.json` from its creator's repo. If anything changed, it opens a pull request named "Sync upstream skills" with a link to each upstream diff. If nothing changed, it does nothing. For the action to open pull requests, **Settings > Actions > General > Workflow permissions > Allow GitHub Actions to create and approve pull requests** must be on.
 
 Review the upstream diff before merging. Skills run with full agent permissions, and once merged, `npx skills update` delivers the change to every repo that installed them.
 
