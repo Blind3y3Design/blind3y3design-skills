@@ -4,6 +4,7 @@ The agent skills I use when I work with agents on design and development. Some a
 
 | Skill | What it does | Source |
 | --- | --- | --- |
+| [`adversarial-design-review`](skills/adversarial-design-review/SKILL.md) | Judges one or more designs against a goal or acceptance criteria. Red-teams each design across eight axes, delivers severity-rated verdicts per criterion, and hands back plans to deepen, expand, or combine the designs, with cited evidence for every finding. | Original |
 | [`arena`](skills/arena/SKILL.md) | Runs N independent attempts at a task on models you pick, judges them against a rubric, and merges the best into one result. | Adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) |
 | [`principle-prove-it-works`](skills/principle-prove-it-works/SKILL.md) | Before the agent declares work done, makes it verify against the real artifact rather than a proxy. | Adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) |
 | [`domain-modeling`](skills/domain-modeling/SKILL.md) | Builds and sharpens a project's domain model as you design. It challenges fuzzy terms, records them in `GLOSSARY.md`, and writes ADRs for hard-to-reverse decisions. | Direct copy from [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling) |
@@ -13,6 +14,7 @@ The agent skills I use when I work with agents on design and development. Some a
 ## How they fit together
 
 - Before building, `domain-modeling` settles what things are called and records why the big decisions went the way they did.
+- When a design is on the table, `adversarial-design-review` judges it against the goal before anyone commits to it.
 - While building UI, `frontend-design` sets the visual direction and reviews the design plan before any code is written.
 - When the right approach is unclear, `arena` runs several attempts in parallel and keeps the best.
 - Before calling work done, `principle-prove-it-works` checks the real output, not a stand-in.
