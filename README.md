@@ -4,15 +4,19 @@ The agent skills I use when I work with agents on design and development. Some a
 
 | Skill | What it does | Source |
 | --- | --- | --- |
+| [`adversarial-design-review`](skills/adversarial-design-review/SKILL.md) | Reviews designs against goals and acceptance criteria, separating confirmed failures from missing evidence. Supports comparison, red-teaming, expansion, and synthesis, with mandatory-gate decisions and prioritized repair and validation actions. | Original |
 | [`arena`](skills/arena/SKILL.md) | Runs N independent attempts at a task on models you pick, judges them against a rubric, and merges the best into one result. | Adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) |
 | [`principle-prove-it-works`](skills/principle-prove-it-works/SKILL.md) | Before the agent declares work done, makes it verify against the real artifact rather than a proxy. | Adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) |
 | [`domain-modeling`](skills/domain-modeling/SKILL.md) | Builds and sharpens a project's domain model as you design. It challenges fuzzy terms, records them in `GLOSSARY.md`, and writes ADRs for hard-to-reverse decisions. | Direct copy from [Matt Pocock](https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling) |
 | [`frontend-design`](skills/frontend-design/SKILL.md) | Gives new or reworked UI a deliberate visual direction, with guidance on typography, layout, motion, and interface copy, so it doesn't read as a templated default. | Direct copy from [Anthropic](https://github.com/anthropics/skills/tree/main/skills/frontend-design) |
 | [`unslop`](skills/unslop/SKILL.md) | Edits text to remove common AI writing patterns, such as filler phrases, inflated vocabulary, em dashes, and vague attributions, while keeping the meaning and tone. Runs only when you invoke it. | Direct copy from [pstack](https://github.com/cursor/plugins/tree/main/pstack/skills/unslop) |
 
+The table links to canonical agent skills in [skills/](skills/). Dedicated single-file Figma adaptations live in [figma-skills/](figma-skills/README.md), with mirrored directory names and explicit source relationships. Currently, only [adversarial-design-review](figma-skills/adversarial-design-review/SKILL.md) has a Figma edition.
+
 ## How they fit together
 
 - Before building, `domain-modeling` settles what things are called and records why the big decisions went the way they did.
+- When a design is on the table, `adversarial-design-review` judges it against the goal before anyone commits to it.
 - While building UI, `frontend-design` sets the visual direction and reviews the design plan before any code is written.
 - When the right approach is unclear, `arena` runs several attempts in parallel and keeps the best.
 - Before calling work done, `principle-prove-it-works` checks the real output, not a stand-in.
@@ -50,6 +54,8 @@ To run a sync now, use **Actions > Sync upstream skills > Run workflow** on GitH
 
 To add another direct copy, add an entry to `upstream.json` with the skill's `name` (the folder name here), the upstream `repo`, `ref`, and `path` to the skill folder, an optional `license` to copy, and a `syncedFrom` commit, then run the script.
 
+The sync only updates canonical copies under [skills/](skills/). Figma editions are maintained adaptations, not sync destinations; update an edition alongside any relevant source changes using the [Figma maintenance rules](figma-skills/README.md#maintaining-the-source-relationship).
+
 ## Install
 
 From the root of the repo you want the skills in, run the [`skills` CLI](https://github.com/vercel-labs/skills):
@@ -62,13 +68,19 @@ It lists the skills in this repo, asks which ones you want, and detects which ag
 
 ### Figma
 
-The CLI doesn't install into Figma. In the Figma agent or Figma Make, go to Skills > Add skill, then upload the `SKILL.md`. Invoke a skill with `/<name>`, for example `/arena`. Only the first skill named in a prompt runs, which is why arena carries the core of prove-it-works inline. Figma accepts only one Markdown file per skill, so `domain-modeling` loses its glossary and ADR format files there; the agent still follows `SKILL.md` but won't have the templates.
+The CLI doesn't install into Figma. Choose an edition from the [Figma catalog](figma-skills/README.md), download its raw `SKILL.md`, and import that single Markdown file through the skill-upload flow in your Figma environment. Follow that environment's filename and metadata requirements. For adversarial reviews, use [figma-skills/adversarial-design-review/SKILL.md](figma-skills/adversarial-design-review/SKILL.md) and invoke `/adversarial-design-review`.
+
+Figma accepts only one Markdown file per skill. Each dedicated edition contains its full workflow and any required reference content inline; upload only that file, not the canonical folder or this repository's documentation. Do not install both editions of the same skill in one environment. Canonical skills with companion files, such as domain-modeling, need a self-contained adaptation before they can retain their complete instructions in Figma.
 
 ## Adding a skill
 
 Put each skill at `skills/<name>/SKILL.md`, with `name` in the frontmatter matching the folder name. The CLI finds skills in that layout, so nothing else needs registering. Run `npx skills add . --list` from this repo to confirm a new skill is picked up.
 
+For a Figma adaptation, use `figma-skills/<name>/SKILL.md` with the same directory name and frontmatter `name` as its canonical source. Keep that directory single-file, inline required companion content, retain source provenance, and add the source-to-edition relationship to the [Figma catalog](figma-skills/README.md).
+
 ## Figma status
+
+The adversarial-design-review edition is packaged for the single-file requirement; successful import and runtime behavior still need verification in the target Figma environment. No dedicated Figma editions have been added for the other skills.
 
 Figma documents no subagents and no per-agent model choice, so arena runs there in sequential mode. Figma Make lets you switch the conversation's model, but switching blocks skill invocation on the next prompt. Pick the model before you invoke `/arena`.
 
